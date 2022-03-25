@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
         controller: controller,
         itemCount: 10,
         itemBuilder: (context, page) {
-          double value = 0.0;
+          double value = 1.0;
           if (page == currentPage.floor()) {
             value = currentPage - page;
             value = 1 - value;
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             value = 1 - value;
           }
 
-          final rotateAnimation = lerpDouble(0, 50, value);
+          final rotateAnimation = lerpDouble(-0.4, 0, value);
           return Transform(
             transform: Matrix4.identity()..rotateZ(rotateAnimation!),
             child: Container(
