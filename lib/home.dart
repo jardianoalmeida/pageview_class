@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         controller: controller,
         itemCount: 10,
         itemBuilder: (context, page) {
-          double value = 1.0;
+          double value = 0.0;
           if (page == currentPage.floor()) {
             value = currentPage - page;
             value = 1 - value;
@@ -44,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
             value = page - currentPage;
             value = 1 - value;
           }
-          return Opacity(
-            opacity: value,
+          return Transform(
+            transform: Matrix4.identity()..rotateZ(value),
             child: Container(
               color: page % 2 == 0 ? Colors.red : Colors.blue,
               child: Center(
