@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Performance da loja'),
+        title: const Text('kkkkkk'),
         centerTitle: true,
       ),
       body: PageView.builder(
@@ -39,21 +39,32 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: 10,
         itemBuilder: (context, page) {
           double value = 1.0;
+          bool isCurrent = false;
           if (page == currentPage.floor()) {
             value = currentPage - page;
             value = 1 - value;
+            isCurrent = true;
           } else if (page == currentPage.floor()) {
             value = page - currentPage;
             value = 1 - value;
+            isCurrent = false;
           }
 
-          final rotateAnimation = lerpDouble(-0.4, 0, value);
+          final rotateAnimation =
+              lerpDouble(isCurrent ? -0.87 : 0.87, 0, value);
+          final sizeAnimation = lerpDouble(0.50, 1, value);
+          final opacityAnimation = Interval(0.5, 1).transformInternal(value);
+
           return Transform(
-            transform: Matrix4.identity()..rotateZ(rotateAnimation!),
+            alignment: Alignment.center,
+            transform: Matrix4.identity()..scale(sizeAnimation),
             child: Container(
               color: page % 2 == 0 ? Colors.red : Colors.blue,
               child: Center(
-                child: Text('$currentPage'),
+                child: Opacity(
+                  opacity: opacityAnimation,
+                  child: Text('$currentPage'),
+                ),
               ),
             ),
           );
