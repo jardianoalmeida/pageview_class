@@ -36,14 +36,21 @@ class _MyHomePageState extends State<MyHomePage> {
         controller: controller,
         itemCount: 10,
         itemBuilder: (context, page) {
-          if (currentPage.floor() == page) {
-            final value = currentPage - page;
-            print(value);
+          double value = 1.0;
+          if (page == currentPage.floor()) {
+            value = currentPage - page;
+            value = 1 - value;
+          } else if (page == currentPage.floor()) {
+            value = page - currentPage;
+            value = 1 - value;
           }
-          return Container(
-            color: page % 2 == 0 ? Colors.red : Colors.blue,
-            child: Center(
-              child: Text('$currentPage'),
+          return Opacity(
+            opacity: value,
+            child: Container(
+              color: page % 2 == 0 ? Colors.red : Colors.blue,
+              child: Center(
+                child: Text('$currentPage'),
+              ),
             ),
           );
         },
