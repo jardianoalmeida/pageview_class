@@ -12,12 +12,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final controller = PageController(
     viewportFraction: 0.80,
+    initialPage: 1,
   );
 
+  double currentPage = 0.0;
   @override
   void initState() {
     controller.addListener(() {
-      print(controller.page);
+      currentPage = controller.page!;
+      setState(() {});
     });
     super.initState();
   }
@@ -29,12 +32,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Performance da loja'),
         centerTitle: true,
       ),
-      body: PageView(
+      body: PageView.builder(
         controller: controller,
-        children: [
-          Container(color: Colors.red),
-          Container(color: Colors.blue),
-        ],
+        itemBuilder: (context, index) {
+          return Container(
+            color: index % 2 == 0 ? Colors.red : Colors.blue,
+            child: Center(
+              child: Text('$currentPage'),
+            ),
+          );
+        },
       ),
     );
   }
