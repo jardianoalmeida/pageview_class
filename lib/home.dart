@@ -11,7 +11,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final controller = PageController(
-    viewportFraction: 0.80,
+    //   viewportFraction: 0.50,
     initialPage: 1,
   );
 
@@ -34,9 +34,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: PageView.builder(
         controller: controller,
-        itemBuilder: (context, index) {
+        itemCount: 10,
+        itemBuilder: (context, page) {
+          if (currentPage.floor() == page) {
+            final value = currentPage - page;
+            print(value);
+          }
           return Container(
-            color: index % 2 == 0 ? Colors.red : Colors.blue,
+            color: page % 2 == 0 ? Colors.red : Colors.blue,
             child: Center(
               child: Text('$currentPage'),
             ),
