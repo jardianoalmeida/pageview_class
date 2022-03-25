@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -44,8 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
             value = page - currentPage;
             value = 1 - value;
           }
+
+          final rotateAnimation = lerpDouble(0, 50, value);
           return Transform(
-            transform: Matrix4.identity()..rotateZ(value),
+            transform: Matrix4.identity()..rotateZ(rotateAnimation!),
             child: Container(
               color: page % 2 == 0 ? Colors.red : Colors.blue,
               child: Center(
